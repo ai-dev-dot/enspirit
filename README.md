@@ -49,16 +49,24 @@
 
 需要：Docker 和 Docker Compose。
 
+**第一步：下载部署文件**
+
+macOS / Linux：
 ```bash
-# 下载部署文件
 curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml
-
-# 启动（一条命令）
-docker compose up -d
-
-# 访问 http://localhost:3000
-# 第一个注册的用户自动成为管理员
 ```
+
+Windows (PowerShell)：
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml -OutFile docker-compose.yml
+```
+
+**第二步：启动**
+```bash
+docker compose up -d
+```
+
+**第三步：访问** http://localhost:3000，第一个注册的用户自动成为管理员。
 
 启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
 
