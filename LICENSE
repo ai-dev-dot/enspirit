@@ -1,21 +1,17 @@
-MIT License
+# 专有软件许可证
 
-Copyright (c) 2026 ai-dev-dot
+版权所有 (c) 2026 赋灵 Enspirit
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+保留所有权利。
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+特此授予任何人获取本软件副本和相关文档文件（以下简称"软件"）的权利，
+允许在个人、非商业用途下使用本软件，但须遵守以下条件：
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. 不得修改、改编、反编译、反向工程、反汇编或以其他方式尝试提取本软件的源代码
+2. 不得将本软件用于任何商业目的，包括但不限于出售、出租、许可或分发本软件
+3. 不得将本软件用于任何非法或未经授权的目的
+4. 不得移除或修改本软件中的任何版权声明或其他专有权利声明
+
+本软件按"原样"提供，不提供任何明示或暗示的保证，包括但不限于对适销性、
+特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对
+因使用本软件而产生的任何索赔、损害或其他责任承担责任。
