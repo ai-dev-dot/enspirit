@@ -47,31 +47,32 @@
 
 ## 快速部署
 
-需要：Docker 和 Docker Compose（Windows 用户推荐 [Docker Desktop](https://www.docker.com/products/docker-desktop/)）。
+需要：Docker 和 Docker Compose。
 
 ```bash
-# macOS / Linux
+# 下载部署文件
 curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml
-curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/.env.example
-```
 
-```powershell
-# Windows (PowerShell)
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml -OutFile docker-compose.yml
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/.env.example -OutFile .env.example
-```
-
-```bash
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env，设置 DB_PASSWORD 为你的强密码
-
-# 启动
+# 启动（一条命令）
 docker compose up -d
 
 # 访问 http://localhost:3000
 # 第一个注册的用户自动成为管理员
 ```
+
+启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
+
+## 自定义配置
+
+数据库密码和密钥已预设默认值，如需修改，编辑 `docker-compose.yml` 中的环境变量：
+
+| 变量 | 默认值 | 说明 |
+|------|--------|------|
+| `POSTGRES_PASSWORD` | `enspirit123` | 数据库密码 |
+| `DATABASE_URL` | 对应上述密码 | PostgreSQL 连接串 |
+| `AUTH_SECRET` | 预设值 | 会话加密密钥，建议改为随机字符串 |
+
+修改后执行 `docker compose up -d` 重新部署。
 
 ## 升级
 
@@ -81,8 +82,6 @@ docker compose up -d
 ```
 
 ## 配置 LLM
-
-启动后，登录管理员账号，在管理后台 `/admin/models` 中配置 LLM Provider（API Key、模型等）。
 
 支持的 LLM 协议：
 - OpenAI 兼容（OpenAI、DeepSeek、通义千问、GLM 等）
