@@ -2,10 +2,10 @@ services:
   app:
     image: ghcr.io/ai-dev-dot/enspirit:latest
     ports:
-      - "3000:3000"
+      - "8080:3000"
     environment:
       - DATABASE_URL=postgresql://enspirit:enspirit123@db:5432/enspirit
-      - AUTH_SECRET=enspirit-default-change-in-production
+      - AUTH_SECRET=
       - AUTH_TRUST_HOST=true
     depends_on:
       db:

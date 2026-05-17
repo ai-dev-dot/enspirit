@@ -66,7 +66,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/mai
 docker compose up -d
 ```
 
-**第三步：访问** http://localhost:3000，第一个注册的用户自动成为管理员。
+**第三步：访问** http://localhost:8080，第一个注册的用户自动成为管理员。
 
 启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
 
