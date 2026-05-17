@@ -4,21 +4,29 @@
 
 ## 快速部署
 
-需要：Docker 和 Docker Compose。
+需要：Docker 和 Docker Compose（Windows 用户推荐 [Docker Desktop](https://www.docker.com/products/docker-desktop/)）。
 
 ```bash
-# 1. 下载部署文件
+# macOS / Linux
 curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml
 curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/.env.example
+```
 
-# 2. 配置环境变量
+```powershell
+# Windows (PowerShell)
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml -OutFile docker-compose.yml
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/.env.example -OutFile .env.example
+```
+
+```bash
+# 配置环境变量
 cp .env.example .env
 # 编辑 .env，设置 DB_PASSWORD 为你的强密码
 
-# 3. 启动
+# 启动
 docker compose up -d
 
-# 4. 访问 http://localhost:3000
+# 访问 http://localhost:3000
 # 第一个注册的用户自动成为管理员
 ```
 
