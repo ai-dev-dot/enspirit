@@ -4,8 +4,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://enspirit:${DB_PASSWORD}@db:5432/enspirit
-      - AUTH_SECRET=${AUTH_SECRET}
+      - DATABASE_URL=postgresql://enspirit:enspirit123@db:5432/enspirit
+      - AUTH_SECRET=
     depends_on:
       db:
         condition: service_healthy
@@ -15,7 +15,7 @@ services:
     image: postgres:18-alpine
     environment:
       - POSTGRES_USER=enspirit
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_PASSWORD=enspirit123
       - POSTGRES_DB=enspirit
     volumes:
       - pgdata:/var/lib/postgresql/data
