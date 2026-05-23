@@ -24,12 +24,12 @@
 
 - **世界构建向导** — AI 世界建筑师通过自然对话帮你构建世界观：时代背景、核心规则、初始事件、角色建议
 - **角色灵魂铸造** — AI 灵魂铸造师深入挖掘角色的人格特质（OCEAN 五因素）、核心价值观、人生经历、潜意识
-- **三层仿真引擎** — B 环行为校验 → A 环叙事精修 → C 环导演品控，角色自主决策、情节自然演化
+- **事件驱动因果链引擎 v2.0** — Director LLM 编排事件步骤 → 角色自主决策行动 → Narrator 合成为叙事
 - **角色记忆系统** — LLM 从第一人称视角生成经历记忆，recency × importance 粗筛 + LLM 相关性检索
 - **观察剧场** — 双面板实时观测叙事流和世界状态，支持事件注入、回合回溯、世界分支
 - **世界备份与分支** — 自动 checkpoint + 一键重置世界 + 从当前状态或任意回合复制出平行世界
-- **LLM 场景管理** — 12 个场景统一解析，支持多模型灵活分配
-- **Prompt 工程系统** — 19 个模板存 DB，可在后台通过 LLM loop 自动优化
+- **LLM 场景管理** — 11 个场景统一解析，支持多模型灵活分配
+- **Prompt 工程系统** — 20 个模板存 DB，可在后台通过 LLM loop 自动优化
 
 ---
 
@@ -41,7 +41,7 @@
 | 语言 | TypeScript |
 | 数据库 | PostgreSQL + Prisma 7 |
 | 认证 | NextAuth v5 (Credentials + JWT) |
-| AI | Vercel AI SDK (`generateText` + `generateObject`) |
+| AI | Vercel AI SDK (`generateText` + `tool()`) |
 
 ---
 
@@ -66,7 +66,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/mai
 docker compose up -d
 ```
 
-**第三步：访问** http://localhost:8080，第一个注册的用户自动成为管理员。
+**第三步：访问** `http://localhost:8080`，第一个注册的用户自动成为管理员。
 
 启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
 
@@ -78,7 +78,7 @@ docker compose up -d
 |------|--------|------|
 | `POSTGRES_PASSWORD` | `enspirit123` | 数据库密码 |
 | `DATABASE_URL` | 对应上述密码 | PostgreSQL 连接串 |
-| `AUTH_SECRET` | 预设值 | 会话加密密钥，建议改为随机字符串 |
+| `AUTH_SECRET` | 空 | 会话密钥，空则容器启动时自动生成 |
 
 修改后执行 `docker compose up -d` 重新部署。
 
