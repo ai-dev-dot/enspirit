@@ -26,10 +26,11 @@
 - **角色灵魂铸造** — AI 灵魂铸造师深入挖掘角色的人格特质（OCEAN 五因素）、核心价值观、人生经历、潜意识
 - **事件驱动因果链引擎 v2.0** — Director LLM 编排事件步骤 → 角色自主决策行动 → Narrator 合成为叙事
 - **角色记忆系统** — LLM 从第一人称视角生成经历记忆，recency × importance 粗筛 + LLM 相关性检索
-- **观察剧场** — 双面板实时观测叙事流和世界状态，支持事件注入、回合回溯、世界分支
+- **观察剧场** — 双面板实时观测叙事流和世界状态，支持事件注入、回合回溯、世界分支、推演暂停/继续/终止
 - **世界备份与分支** — 自动 checkpoint + 一键重置世界 + 从当前状态或任意回合复制出平行世界
-- **LLM 场景管理** — 11 个场景统一解析，支持多模型灵活分配
-- **Prompt 工程系统** — 20 个模板存 DB，可在后台通过 LLM loop 自动优化
+- **NPC 激活系统** — 自动从叙事中识别 NPC，LLM 多步提取经历/心理/记忆，一键激活为正式角色
+- **LLM 场景管理** — 17 个场景统一解析，支持多模型灵活分配
+- **Prompt 工程系统** — 23 个模板存 DB，可在后台通过 LLM loop 自动优化
 
 ---
 
@@ -41,7 +42,9 @@
 | 语言 | TypeScript |
 | 数据库 | PostgreSQL + Prisma 7 |
 | 认证 | NextAuth v5 (Credentials + JWT) |
-| AI | Vercel AI SDK (`generateText` + `tool()`) |
+| AI | Vercel AI SDK (`generateText` + `generateObject`) |
+| 样式 | Tailwind CSS + 墨韵 (Ink Rhythm) 设计系统 |
+| 字体 | Noto Serif SC / LXGW WenKai TC |
 
 ---
 
