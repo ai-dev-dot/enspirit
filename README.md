@@ -24,13 +24,14 @@
 
 - **世界构建向导** — AI 世界建筑师通过自然对话帮你构建世界观：时代背景、核心规则、初始事件、角色建议
 - **角色灵魂铸造** — AI 灵魂铸造师深入挖掘角色的人格特质（OCEAN 五因素）、核心价值观、人生经历、潜意识
-- **事件驱动因果链引擎 v2.0** — Director LLM 编排事件步骤 → 角色自主决策行动 → Narrator 合成为叙事
+- **事件驱动因果链引擎** — Director LLM 调度 + 因果链循环，角色自主行动、情节自然演化
 - **角色记忆系统** — LLM 从第一人称视角生成经历记忆，recency × importance 粗筛 + LLM 相关性检索
-- **观察剧场** — 双面板实时观测叙事流和世界状态，支持事件注入、回合回溯、世界分支、推演暂停/继续/终止
+- **观察剧场** — 双面板实时观测叙事流和世界状态，支持事件注入、回合回溯、世界分支
 - **世界备份与分支** — 自动 checkpoint + 一键重置世界 + 从当前状态或任意回合复制出平行世界
 - **NPC 激活系统** — 自动从叙事中识别 NPC，LLM 多步提取经历/心理/记忆，一键激活为正式角色
-- **LLM 场景管理** — 17 个场景统一解析，支持多模型灵活分配
-- **Prompt 工程系统** — 23 个模板存 DB，可在后台通过 LLM loop 自动优化
+- **LLM 场景管理** — 20 个场景统一解析，支持多模型灵活分配
+- **Prompt 工程系统** — 27 个模板存文件系统（prompts/），可在后台编辑，版本管理由 Git 负责
+- **QA 质量分析** — 基于真实世界的四角色 LLM 评审团（叙事评论家、Agent 架构师、Prompt 工程师、一致性审计）
 
 ---
 
@@ -48,57 +49,85 @@
 
 ---
 
-## 快速部署
+## 快速开始
 
-需要：Docker 和 Docker Compose。
+### 环境要求
 
-**第一步：下载部署文件**
+- Node.js 20+
+- PostgreSQL 16+
+- Git
 
-macOS / Linux：
-```bash
-curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml
-```
-
-Windows (PowerShell)：
-```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml -OutFile docker-compose.yml
-```
-
-**第二步：启动**
-```bash
-docker compose up -d
-```
-
-**第三步：访问** `http://localhost:8080`，第一个注册的用户自动成为管理员。
-
-启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
-
-## 自定义配置
-
-数据库密码和密钥已预设默认值，如需修改，编辑 `docker-compose.yml` 中的环境变量：
-
-| 变量 | 默认值 | 说明 |
-|------|--------|------|
-| `POSTGRES_PASSWORD` | `enspirit123` | 数据库密码 |
-| `DATABASE_URL` | 对应上述密码 | PostgreSQL 连接串 |
-| `AUTH_SECRET` | 空 | 会话密钥，空则容器启动时自动生成 |
-
-修改后执行 `docker compose up -d` 重新部署。
-
-## 升级
+### 安装
 
 ```bash
-docker compose pull
-docker compose up -d
+git clone https://github.com/ai-dev-dot/enspirit.git
+cd enspirit
+npm install
 ```
 
-## 配置 LLM
+### 配置
 
-支持的 LLM 协议：
-- OpenAI 兼容（OpenAI、DeepSeek、通义千问、GLM 等）
-- Anthropic 兼容（Claude 系列）
+创建 `.env` 文件：
 
-## 系统要求
+```env
+DATABASE_URL="postgresql://<user>:<password>@localhost:5432/enspirit"
+AUTH_SECRET="your-auth-secret"
+```
 
-- Docker 20.10+
-- 至少 2GB 可用内存
+### 数据库
+
+```bash
+npx prisma db push      # 同步 schema 到数据库
+npx prisma generate      # 生成 Prisma client
+npx tsx scripts/seed-config.ts    # 写入系统参数
+npx tsx scripts/seed-test-users.ts # 创建测试账户
+# Prompt 模板存储在 prompts/ 目录，无需 seed 脚本
+```
+
+### 启动
+
+```bash
+npm run dev
+```
+
+打开 [http://localhost:3000](http://localhost:3000)，使用 `testadmin` / `testadmin` 登录。
+
+---
+
+## 项目结构
+
+```
+app/
+├── create-world/        # 世界构建（AI 向导 + 表单）
+├── create-character/    # 角色创建（AI 向导 + 表单）
+├── world/[worldId]/     # 世界详情 + LLM 配置
+├── theater/[worldId]/   # 观察剧场
+├── character/[id]/      # 角色档案 + 编辑
+├── library/             # 用户世界列表
+├── login/ register/     # 认证
+├── admin/               # 管理后台
+├── lib/simulation/      # 仿真引擎（Director + 因果链）
+├── lib/llm/             # LLM 解析、场景管理
+└── ui/                  # 共享 UI 样式
+prisma/
+└── schema.prisma        # 数据模型
+docs/
+├── data-dictionary.md   # 数据字典
+└── superpowers/         # 设计文档与计划
+scripts/                 # 数据库种子脚本
+```
+
+---
+
+## 文档
+
+- [CLAUDE.md](./CLAUDE.md) — AI 编码助手上下文
+- [数据字典](./docs/data-dictionary.md) — 业务语义说明
+- [设计文档](./docs/superpowers/specs/) — 产品规格说明
+- [实现计划](./docs/superpowers/plans/) — 开发计划
+
+---
+
+## 许可证
+
+MIT
