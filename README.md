@@ -134,3 +134,5 @@ docker compose up -d
 
 - Docker 20.10+
 - 至少 2GB 可用内存
+
+<!-- 测试 Git Subtree 同步 -->
