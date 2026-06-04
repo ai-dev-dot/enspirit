@@ -6,6 +6,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://enspirit:enspirit123@db:5432/enspirit
       - AUTH_SECRET=
+      - AUTH_URL=http://localhost:8080
     depends_on:
       db:
         condition: service_healthy
