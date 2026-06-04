@@ -50,26 +50,58 @@
 
 ## 快速部署
 
+提供两种安装方式，按需选择：
+
+### 方式一：Docker 安装（推荐）
+
 需要：Docker 和 Docker Compose。
 
-**第一步：下载部署文件**
-
-macOS / Linux：
 ```bash
+# 下载部署文件
 curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml
-```
 
-Windows (PowerShell)：
-```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compose.yml -OutFile docker-compose.yml
-```
-
-**第二步：启动**
-```bash
+# 启动
 docker compose up -d
 ```
 
-**第三步：访问** `http://localhost:8080`，第一个注册的用户自动成为管理员。
+访问 `http://localhost:8080`，第一个注册的用户自动成为管理员。
+
+### 方式二：一键脚本安装
+
+需要：PostgreSQL（脚本会自动检测，已有则跳过安装）。
+
+```bash
+# macOS / Linux
+curl -sSL https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/install.sh | bash
+
+# Windows (PowerShell)
+irm https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/install.ps1 | iex
+```
+
+脚本会自动：
+1. 检测/安装 Node.js 22+
+2. 检测/安装 PostgreSQL（如已有则跳过）
+3. 下载预编译包（不含源码）
+4. 配置数据库
+5. 启动服务
+
+访问 `http://localhost:3000`，第一个注册的用户自动成为管理员。
+
+**管理命令：**
+```bash
+# 启动
+~/.enspirit/start.sh
+
+# 停止
+kill $(cat ~/.enspirit/enspirit.pid)
+
+# 日志
+tail -f ~/.enspirit/enspirit.log
+```
+
+> **注意**：脚本安装下载的是预编译产物（`.next/`、`public/`、`prisma/`），不包含 TypeScript 源码。
+
+---
 
 启动后登录管理员账号，在 `/admin/models` 中配置 LLM Provider 即可开始使用。
 
