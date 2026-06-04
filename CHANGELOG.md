@@ -15,6 +15,9 @@
 - 新增 3 个 LLM 场景：QA_ARCHITECT、QA_PROMPT_ENGINEER、QA_CONSISTENCY_AUDITOR
 - 新增 4 个 prompt 模板：qa-narrative-critic、qa-architect、qa-prompt-engineer、qa-consistency-auditor
 - 新增数据库表：QAAnalysis、QADimensionResult、QADiagnosisIssue
+- **一键安装脚本**：`install.sh`（macOS/Linux）和 `install.ps1`（Windows），支持自动检测/安装 PostgreSQL
+- **预编译包下载**：用户无需 Docker，直接下载运行
+- **Git Subtree 管理公开仓库**：公开仓库内容在 `public-repo/` 目录中有版本控制
 
 ### Changed
 - QA 评估引擎从合成测试数据方案重构为真实世界单回合分析方案
@@ -24,6 +27,8 @@
 - **推演性能优化**：动态步数上限（角色数×3 + 事件子步骤），性能提升 70%+
 - **叙事质量提升**：Narrator 覆盖所有角色、包含对话、行动优先
 - **UI 文案统一**："位置"改为"地点"
+- **CI workflow 优化**：sync-and-release 直接构建预编译包，避免 artifacts 下载网络问题
+- **Next.js standalone 输出**：添加 `output: "standalone"` 配置，支持独立部署
 
 ### Fixed
 - Director newLocation 描述从"位置ID"改为"位置名称"，修复角色位置显示为 entity ID 的 bug
@@ -32,12 +37,16 @@
 - 原始数据查看按钮点击冒泡导致卡片折叠
 - PrismaPg SASL 密码解析错误（测试环境）
 - 价值观处理器 JSON 解析 bug
+- **公开仓库文件变空白**：使用 Git Subtree 替代手动 API 同步，避免上传空内容
+- **预编译包文件名不一致**：统一使用 `enspirit-vX.Y.Z-platform-arch.tar.gz` 格式
+- **Next.js standalone 目录不存在**：添加 `output: "standalone"` 配置
 
 ### Changed (Breaking)
 - **Prompt 存储从 DB 改为文件系统**：移除 `PromptTemplate` 表，prompt 存储在 `prompts/<name>/system.md` + `user.md`
 - **版本管理由 Git 负责**：移除 DB 版本管理（version、isActive 字段），查看 `git log prompts/<name>/` 获取历史
 - **LLMCallLog 关联方式变更**：`promptTemplateId`（FK）改为 `promptTemplateName`（字符串）
 - **管理后台简化**：移除版本浏览/对比/激活功能，改为直接编辑文件
+- **公开仓库管理方式变更**：从手动 API 同步改为 Git Subtree（`public-repo/` 目录）
 
 ## [v0.1.8] - 2026-05-23
 
