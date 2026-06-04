@@ -1,0 +1,31 @@
+services:
+  app:
+    image: ghcr.io/ai-dev-dot/enspirit:latest
+    ports:
+      - "8080:3000"
+    environment:
+      - DATABASE_URL=postgresql://enspirit:enspirit123@db:5432/enspirit
+      - AUTH_SECRET=
+      - AUTH_URL=http://localhost:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      - POSTGRES_USER=enspirit
+      - POSTGRES_PASSWORD=enspirit123
+      - POSTGRES_DB=enspirit
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U enspirit"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
