@@ -4,6 +4,41 @@
 
 ## [Unreleased]
 
+（无）
+
+## [v0.2.0] - 2026-06-04
+
+### Added
+- QA 质量分析框架：基于真实世界的四角色 LLM 评审团（叙事评论家、Agent 架构师、Prompt 工程师、一致性审计）
+- 质量分析 API：`POST /api/qa/analyze`（触发分析）、`GET /api/qa/analyses`（分析历史）
+- 质量分析 UI：世界详情页「质量分析」按钮、分析报告详情页（维度评分 + 诊断问题）
+- 新增 3 个 LLM 场景：QA_ARCHITECT、QA_PROMPT_ENGINEER、QA_CONSISTENCY_AUDITOR
+- 新增 4 个 prompt 模板：qa-narrative-critic、qa-architect、qa-prompt-engineer、qa-consistency-auditor
+- 新增数据库表：QAAnalysis、QADimensionResult、QADiagnosisIssue
+
+### Changed
+- QA 评估引擎从合成测试数据方案重构为真实世界单回合分析方案
+- 叙事评论家改用 `resolvePrompt()` 从文件系统读取 prompt 模板
+- 综合评分改用 LLM 生成的 issues 替换硬编码诊断模板
+- LLM 场景总数从 17 个增至 20 个，prompt 模板从 23 个增至 27 个
+- **推演性能优化**：动态步数上限（角色数×3 + 事件子步骤），性能提升 70%+
+- **叙事质量提升**：Narrator 覆盖所有角色、包含对话、行动优先
+- **UI 文案统一**："位置"改为"地点"
+
+### Fixed
+- Director newLocation 描述从"位置ID"改为"位置名称"，修复角色位置显示为 entity ID 的 bug
+- Director reason 必须与 nextActorId 一致，修复角色名不匹配问题
+- 物品所有者显示角色名而非 entityId
+- 原始数据查看按钮点击冒泡导致卡片折叠
+- PrismaPg SASL 密码解析错误（测试环境）
+- 价值观处理器 JSON 解析 bug
+
+### Changed (Breaking)
+- **Prompt 存储从 DB 改为文件系统**：移除 `PromptTemplate` 表，prompt 存储在 `prompts/<name>/system.md` + `user.md`
+- **版本管理由 Git 负责**：移除 DB 版本管理（version、isActive 字段），查看 `git log prompts/<name>/` 获取历史
+- **LLMCallLog 关联方式变更**：`promptTemplateId`（FK）改为 `promptTemplateName`（字符串）
+- **管理后台简化**：移除版本浏览/对比/激活功能，改为直接编辑文件
+
 ## [v0.1.8] - 2026-05-23
 
 ### Added
