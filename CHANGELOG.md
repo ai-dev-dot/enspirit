@@ -4,7 +4,37 @@
 
 ## [Unreleased]
 
-（无）
+## [v0.3.0] - 2026-06-10
+
+### Added
+- **世界事实库（WorldFacts）系统**：从叙事中自动抽取硬事实，跨回合检测事实矛盾并触发重写
+- **世界事实查看页**：世界详情页新增「事实」标签页，展示当前回合所有硬事实
+- **Event Planner（事件编排器）**：用户注入事件后，LLM 编排为结构化引导步骤（guidedSteps），供 Director 逐步执行
+- **编排确认页**：推演前可预览并确认事件编排计划，再交由 Director 执行
+- **无事件编排**：支持承上启下自动推演，无需注入事件也可推进剧情
+- **Director 自由发挥提示**：角色可在无外部事件时自主行动
+- 新增 LLM 场景：FACT_EXTRACTOR、FACT_CONFLICT_CHECK、EVENT_PLANNER
+- 新增 prompt 模板：fact-extractor、fact-conflict-check、event-planner
+- 新增数据库表：WorldFact、OrchestrationPlan
+- QA 评审系统完善：新增 callType 支持、情绪雷达等功能
+
+### Changed
+- 推演流程重构：从多事件并行改为单事件注入 + 引导步骤执行
+- Director Prompt 精简：移除已由 Event Planner 覆盖的编排内容
+- LLM 场景总数从 20 个增至 22 个
+- 动态步数上限公式调整
+
+### Fixed
+- 因果链位置漂移、收束逻辑缺陷修复
+- 冲突检测漏判修复：抽取器保留变更前提 + 增加伪变更判定规则
+- 删除回合/取消推演时补齐 WorldFact、WorldEvent 清理
+- QA 解析失败修复
+- closing-director maxOutputTokens 修复
+- 角色位置持久化 bug 修复
+- Event Planner 工具调用结果提取修复
+- 情绪雷达 JSON 解析失败 bug 修复
+- EntityManager 创建实体时 actorId 为 null 修复
+- 无事件场景按钮禁用条件修复
 
 ## [v0.2.0] - 2026-06-04
 
