@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## [v0.3.1] - 2026-06-10
+
+### Fixed
+- 脚本安装方式（install.sh / install.ps1）默认端口从 3000 改为 8080，与 Docker 方式统一，README 同步更新
+
 ## [v0.3.0] - 2026-06-10
 
 ### Added

@@ -16,7 +16,7 @@ $INSTALL_DIR = "$env:USERPROFILE\.enspirit"
 $DB_NAME = "enspirit"
 $DB_USER = "enspirit"
 $DB_PASSWORD = "enspirit123"
-$DEFAULT_PORT = 3000
+$DEFAULT_PORT = 8080
 
 # ============================================================================
 # 工具函数

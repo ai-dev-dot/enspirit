@@ -18,7 +18,7 @@ INSTALL_DIR="$HOME/.enspirit"
 DB_NAME="enspirit"
 DB_USER="enspirit"
 DB_PASSWORD="enspirit123"
-DEFAULT_PORT=3000
+DEFAULT_PORT=8080
 
 # 颜色
 RED='\033[0;31m'
