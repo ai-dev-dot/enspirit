@@ -67,7 +67,7 @@ curl -O https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/docker-compos
 docker compose up -d
 ```
 
-访问 `http://localhost:8080`，第一个注册的用户自动成为管理员。
+访问 `http://localhost:8080`，**第一个注册的用户自动成为管理员**。
 
 ### 方式二：一键脚本安装
 
@@ -88,7 +88,7 @@ irm https://raw.githubusercontent.com/ai-dev-dot/enspirit/main/install.ps1 | iex
 4. 配置数据库
 5. 启动服务
 
-访问 `http://localhost:8080`，第一个注册的用户自动成为管理员。
+访问 `http://localhost:8080`，**第一个注册的用户自动成为管理员**。
 
 **管理命令：**
 ```bash
